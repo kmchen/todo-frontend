@@ -1,13 +1,13 @@
-# TODO Backend
+# TODO Frontend
 
 ### Description
 
-This service is for getting and manipulating the todo task
+This service is the frontend for getting and manipulating the todo task
 
 ### Tech stack
 
 -   Typescript
--   Express
+-   React
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@ npm install --global yarn
 **Install dependencies and run**
 
 ```sh
-$ cd todo-backend
+$ cd todo-frontend
 $ yarn
 ```
 
@@ -48,8 +48,8 @@ $ yarn test:watch
 
 ## API
 
-Check Swagger reference at
+Frontend is running at
 
 ```
-http://localhost:3000/api-docs
+http://localhost:5173
 ```
