@@ -3,24 +3,25 @@ import style from "styled-components";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { BiCheckCircle } from "react-icons/bi";
 import { FaRegStar } from "react-icons/fa";
-import { AiFillStar } from "react-icons/ai";
+import { useStore } from "../store";
 
-type TodoTask = {
+type Todo = {
   id: string;
-  index?: number;
   text: string;
-  completed?: boolean;
-  important?: boolean;
+  completed: boolean;
+  important: boolean;
   createdAt?: number;
   deleted?: boolean;
   lastEdit?: number;
 };
 
+type TodoProperty = {
+  important: boolean;
+  completed: boolean;
+};
+
 type TaskProps = {
-  todo: TodoTask;
-  removeTodo: (id: string) => void;
-  completeTodo: (id: string) => void;
-  markImportantTodo: (id: string) => void;
+  todo: Todo;
 };
 
 const IconWrapper = style.div`
@@ -38,33 +39,30 @@ const TaskContainer = style.div`
   color: white;
   background: linear-gradient(
     90deg,
-    ${(props: any) =>
-      props.important ? "rgb(255,127,80)" : "rgba(20, 159, 255, 1)"} 0%,
-    ${(props: any) =>
-      props.important ? "rgb(255,127,80)" : "rgba(17, 122, 255, 1)"} 100%
+    ${({ important }: TodoProperty) =>
+      important ? "rgb(255,127,80)" : "rgba(20, 159, 255, 1)"} 0%,
+    ${({ important }: TodoProperty) =>
+      important ? "rgb(255,127,80)" : "rgba(17, 122, 255, 1)"} 100%
   );
   padding: 1rem;
   border-radius: 0.25rem;
   width: 90%;
-  text-decoration: ${(props: any) => (props.completed ? "line-through" : "")};
+  text-decoration: ${({ completed }: TodoProperty) =>
+    completed ? "line-through" : ""};
 `;
 
-export function Task({
-  todo,
-  markImportantTodo,
-  completeTodo,
-  removeTodo,
-}: TaskProps) {
+export function Task({ todo }: TaskProps) {
+  const { deleteTodo, updateTodo } = useStore((state) => state);
   return (
     <TaskContainer completed={todo.completed} important={todo.important}>
       {todo.text}
       <IconWrapper>
-        <FaRegStar onClick={() => markImportantTodo(todo.id)} />
+        <FaRegStar onClick={() => updateTodo("important")(todo.id)} />
         <RiCloseCircleLine
           style={{ marginRight: 5, marginLeft: 5 }}
-          onClick={() => removeTodo(todo.id)}
+          onClick={() => deleteTodo(todo.id)}
         />
-        <BiCheckCircle onClick={() => completeTodo(todo.id)} />
+        <BiCheckCircle onClick={() => updateTodo("completed")(todo.id)} />
       </IconWrapper>
     </TaskContainer>
   );

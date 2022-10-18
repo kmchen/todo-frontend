@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import style from "styled-components";
+import { useStore } from "../store";
 
 const TodoListForm = style.form`
     display: flex;
@@ -24,14 +25,11 @@ const AddTodoButton = style.button`
     background-color: rgb(211,211,211)
 `;
 
-type FormProps = {
-  addTodo: (text: string) => void;
-};
-
-export function Form({ addTodo }: FormProps) {
+export function Form() {
+  const { addTodo } = useStore((state) => state);
   const [input, setInput] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     if (input.length > 0) {
       addTodo(input);
