@@ -28,7 +28,7 @@ function App() {
       <h1>Todo List</h1>
       <Form />
       {todos.map((todo) => (
-        <Task todo={todo} key={todo.id} />
+        <Task {...todo} key={todo.id} />
       ))}
     </TodoAppContainer>
   );

@@ -4,23 +4,31 @@
 
 This service is the frontend for getting and manipulating the todo task
 
+### What's new after the first interview
+
+- Use Zustand as state management tool
+- Use Cypress to perform ui test
+
 ### Tech stack
 
--   Typescript
--   React
+- Typescript
+- React
+- Zustand
+- Cypress
 
-## Table of Contents
+### Table of Contents
 
--   [Install](#install)
--   [Usage](#usage)
--   [API](#api)
+- [Install](#install)
+- [Usage](#usage)
+- [UI Test](#ui)
+- [API](#api)
 
-## Install
+### Install
 
 Yarn is required to install and handle dependencies
 
 ```
-npm install --global yarn
+$ npm install --global yarn
 ```
 
 **Install dependencies and run**
@@ -30,7 +38,7 @@ $ cd todo-frontend
 $ yarn
 ```
 
-## Usage
+### Usage
 
 To run the app in dev mode with hot reload
 
@@ -38,15 +46,18 @@ To run the app in dev mode with hot reload
 $ yarn dev
 ```
 
-To run tests with watch mode
+### ui
 
-```sh
-$ yarn test:watch
+To run ui test, please run redis, todo-backend and todo-frontend ervices first
+
+```
+$ cd todo-frontend
+$ docker-compose -f docker-compose-backend.yml up # Run redis and todo-backend
+$ yarn dev #Run todo-frontend
+$ yarn test:ui
 ```
 
-### Any optional sections
-
-## API
+### API
 
 Frontend is running at
 

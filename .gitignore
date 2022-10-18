@@ -6,3 +6,6 @@ build
 coverage
 .envrc
 .env
+cypress/videos
+cypress/screenshots
+cypress/downloads

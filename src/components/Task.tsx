@@ -37,18 +37,25 @@ const TaskContainer = style.div`
     completed ? "line-through" : ""};
 `;
 
-export function Task({ todo }: TaskProps) {
+export function Task({ id, important, completed, text }: Todo) {
   const { deleteTodo, updateTodo } = useStore((state) => state);
   return (
-    <TaskContainer completed={todo.completed} important={todo.important}>
-      {todo.text}
+    <TaskContainer data-test="task" completed={completed} important={important}>
+      {text}
       <IconWrapper>
-        <FaRegStar onClick={() => updateTodo("important")(todo.id)} />
-        <RiCloseCircleLine
-          style={{ marginRight: 5, marginLeft: 5 }}
-          onClick={() => deleteTodo(todo.id)}
+        <FaRegStar
+          data-test="importantBtn"
+          onClick={() => updateTodo("important")(id)}
         />
-        <BiCheckCircle onClick={() => updateTodo("completed")(todo.id)} />
+        <RiCloseCircleLine
+          data-test="deleteBtn"
+          style={{ marginRight: 5, marginLeft: 5 }}
+          onClick={() => deleteTodo(id)}
+        />
+        <BiCheckCircle
+          data-test="completeBtn"
+          onClick={() => updateTodo("completed")(id)}
+        />
       </IconWrapper>
     </TaskContainer>
   );

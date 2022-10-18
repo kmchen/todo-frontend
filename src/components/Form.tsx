@@ -40,6 +40,7 @@ export function Form() {
   return (
     <TodoListForm onSubmit={handleSubmit}>
       <TodoInput
+        data-test="todoInput"
         value={input}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           const target = e.target as HTMLInputElement;
