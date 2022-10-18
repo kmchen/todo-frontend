@@ -1,24 +1,7 @@
 import create from "zustand";
+import { Todo, Store } from "../types";
 
-type Todo = {
-  id: string;
-  text: string;
-  completed: boolean;
-  important: boolean;
-  createdAt: number;
-  deleted: boolean;
-  lastEdit: number;
-};
-
-type IState = {
-  todos: Todo[];
-  fetchTodo: () => void;
-  addTodo: (text: string) => void;
-  deleteTodo: (id: string) => void;
-  updateTodo: (key: string) => (id: string) => void;
-};
-
-export const useStore = create<IState>((set, get) => ({
+export const useStore = create<Store>((set, get) => ({
   todos: [],
   fetchTodo: () => {
     fetch("/api/v1/task", {})
@@ -40,11 +23,12 @@ export const useStore = create<IState>((set, get) => ({
         let todo = {
           id,
           text,
-          deleted: false,
           completed: false,
           important: false,
+          createdAt: 1,
+          lastEdit: 1,
         };
-        set((state: IState) => ({ todos: [...state.todos, todo] }));
+        set((state: Store) => ({ todos: [...state.todos, todo] }));
       });
   },
   deleteTodo: (id: string) => {

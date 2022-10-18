@@ -1,18 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Form, Task } from "./components";
 import style from "styled-components";
 import { useStore } from "./store";
-
-type Todo = {
-  id: string;
-  text: string;
-  completed: boolean;
-  important: boolean;
-  createdAt?: number;
-  deleted?: boolean;
-  lastEdit?: number;
-};
 
 const TodoAppContainer = style.div`
   display: flex;

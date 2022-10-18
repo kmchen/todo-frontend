@@ -4,21 +4,7 @@ import { RiCloseCircleLine } from "react-icons/ri";
 import { BiCheckCircle } from "react-icons/bi";
 import { FaRegStar } from "react-icons/fa";
 import { useStore } from "../store";
-
-type Todo = {
-  id: string;
-  text: string;
-  completed: boolean;
-  important: boolean;
-  createdAt?: number;
-  deleted?: boolean;
-  lastEdit?: number;
-};
-
-type TodoProperty = {
-  important: boolean;
-  completed: boolean;
-};
+import { Todo, TodoProperty } from "../types";
 
 type TaskProps = {
   todo: Todo;
